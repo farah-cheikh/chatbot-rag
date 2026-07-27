@@ -3,6 +3,7 @@ from src.quality import check_quality
 from src.preprocessing import preprocess_documents
 from src.chunking import create_chunks
 from src.embedding import create_embeddings
+from src.vector_store import save_vector_store
 # 1. Charger les documents
 documents = load_documents("data/raw")
 
@@ -15,8 +16,6 @@ processed_documents = preprocess_documents(documents)
 # 4. Créer les chunks
 chunks = create_chunks(processed_documents)
 
-print(f"\nNombre total de chunks : {len(chunks)}")
-
 print("\nPremier chunk :\n")
 print(chunks[0]["text"][:1000])
 
@@ -24,4 +23,6 @@ print(chunks[0]["text"][:1000])
 embedding_documents = create_embeddings(chunks)
 
 print("Nombre d'embeddings :", len(embedding_documents))
-print("Dimension du premier embedding :", len(embedding_documents[0]["embedding"]))
+
+#sauvegarde dans faiss
+save_vector_store(embedding_documents)
