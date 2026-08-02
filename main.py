@@ -30,27 +30,3 @@ print("\nNombre d'embeddings :", len(embedding_documents))
 # 6. Sauvegarder dans FAISS
 save_vector_store(embedding_documents)
 
-
-# 7. Tester le retrieval
-
-question = "Quelle est la règle de transformation du champ montant à partir de bkhis.mon et bkhis.sen"
-results = retrieve(question, top_k=5)
-print("Question :", question)
-
-for i, result in enumerate(results, start=1):
-    print(f"\n Résultat {i}")
-    print("Document :", result["filename"])
-    print("Texte :")
-    print(result["text"])
-# 8.reponse 
-context = "\n".join(
-    result["text"]
-    for result in results
-)
-answer = generate_answer(
-    question=question,
-    context=context,
-    model="qwen2.5:3b"
-)
-print("\nRÉPONSE DU CHATBOT ")
-print(answer)
