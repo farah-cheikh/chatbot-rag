@@ -6,7 +6,7 @@ def create_chunks(processed_documents):
 
     splitter = SentenceSplitter(
         chunk_size=512,
-        chunk_overlap=50
+        chunk_overlap=150
     )
 
     all_chunks = []

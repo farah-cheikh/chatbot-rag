@@ -10,7 +10,9 @@ def save_vector_store(embedding_documents):
     for doc in embedding_documents:
         vectors.append(doc["embedding"])
     vectors=np.array(vectors,dtype="float32")
-
+    
+    if len(vectors)==0:
+        raise ValueError("Aucun embedding trouvé")
     #creation dindex faiss
     index= faiss.IndexFlatIP(vectors.shape[1])
 

@@ -18,3 +18,6 @@ logs/
 
 .DS_Store
 Thumbs.db
+
+# resultats de comparaison des modeles
+modeles/test_modeles/

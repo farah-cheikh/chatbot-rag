@@ -1,32 +1,12 @@
 import re
-import spacy
-
-nlp = spacy.load("fr_core_news_md")
 
 def clean_text(text):
-
-    text = re.sub(r"\s+", " ", text)
+    text = re.sub(r"[ \t]+", " ", text)         
+    text = re.sub(r"\n{3,}", "\n\n", text)      
+    text = "\n".join(line.strip() for line in text.split("\n"))  
     text = text.strip()
-    doc = nlp(text)
-    tokens = []
-    for token in doc:
-        if token.is_space:
-            continue
+    return text
 
-        if token.is_punct:
-            continue
-
-        if token.like_num:
-            tokens.append(token.text)
-            continue
-
-        if token.text.isupper():
-            tokens.append(token.text)
-            continue
-
-        tokens.append(token.text)
-
-    return " ".join(tokens)
 
 def preprocess_documents(documents):
     processed_documents = []
